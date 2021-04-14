@@ -9,7 +9,7 @@ class Tree:
         self.priority_queue = [Node(key, value) for key, value in frequency.items()]
         # print(self) # uncomment to see each character frequency
 
-    
+
     def compute(self):
         heapify(self.priority_queue)
         while len(self.priority_queue) != 1:
@@ -61,7 +61,7 @@ class Tree:
         if top.has_no_children():
             print(top.character, end='')
             return pointer
-        
+
         pointer += 1
         top = top.left_child if encoded_text[pointer] == '0' else top.right_child
         return Tree.decode(top, pointer, encoded_text)
