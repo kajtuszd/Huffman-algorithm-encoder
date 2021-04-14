@@ -1,5 +1,7 @@
 import os
 
+INPUT_FILE = "input.txt"
+OUTPUT_FILE = "output.txt"
 
 def list_to_str(array):
     text = ""
@@ -10,24 +12,24 @@ def list_to_str(array):
 
 if __name__ == '__main__':
 
-    if not os.path.isfile('./input.txt'):
-        os.mknod("input.txt")
-        raise Exception("Type text to be encoded to input.txt")
+    if not os.path.isfile('./{}'.format(INPUT_FILE)):
+        os.mknod("{}".format(INPUT_FILE))
+        raise Exception("Type text to be encoded in {}".format(INPUT_FILE))
 
-    if not os.path.getsize("./input.txt"):
-        raise Exception("input.txt is empty")
+    if not os.path.getsize("./{}".format(INPUT_FILE)):
+        raise Exception("{} is empty".format(INPUT_FILE))
 
     input_text = []
-    with open('./input.txt') as input_file:
+    with open('./{}'.format(INPUT_FILE)) as input_file:
         input_text = input_file.readlines()
 
     mystring = list_to_str(input_text)
     print(mystring)
 
-    if not os.path.isfile('./output.txt'):
-        os.mknod("output.txt")
+    if not os.path.isfile('./{}'.format(OUTPUT_FILE)):
+        os.mknod("{}".format(OUTPUT_FILE))
 
-    output_file = open("./output.txt", 'w')
+    output_file = open("./{}".format(OUTPUT_FILE), 'w')
     output_file.write("hello world")
     output_file.close()
     print("\n")
