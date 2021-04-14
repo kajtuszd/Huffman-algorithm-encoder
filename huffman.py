@@ -21,6 +21,9 @@ class Node:
     def __str__(self):
         return "character: {}  frequency: {} \n".format(self.character,
                                                                 self.frequency)
+    
+    def has_no_children(self):
+        return self.left_child is None and self.right_child is None
 
 
 class Tree:
@@ -41,9 +44,22 @@ class Tree:
             new_node = Node(None, frequency_sum, left_child=l_child, right_child=r_child)
             heappush(self.priority_queue, new_node)
 
+        codes = {}
+        Tree.encode(self.priority_queue[0], "", codes)
 
-    def encode():
-        pass
+        print("Codes: ", codes)
+
+
+    @staticmethod
+    def encode(root, encoded_text, code):
+        if root is None:
+            return
+
+        if root.has_no_children():
+            code[root.character] = encoded_text if len(encoded_text) > 0 else '1'
+
+        Tree.encode(root.left_child, encoded_text + '0', code)
+        Tree.encode(root.right_child, encoded_text + '1', code)
 
 
     def decode():
