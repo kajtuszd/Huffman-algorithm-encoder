@@ -28,7 +28,7 @@ class Tree:
             encoded_text += codes.get(character)
 
         # print("Encoded text: {} \n".format(encoded_text)) # uncomment to see encoded text
-        print("Decoded text: ", end="")
+        # print("Decoded text: ", end="")
 
         if self.priority_queue[0].has_no_children():
             while self.priority_queue[0].frequency > 0:
@@ -38,7 +38,7 @@ class Tree:
             index = -1
             while index < len(encoded_text) - 1:
                 index = Tree.decode(self.priority_queue[0], index, encoded_text)
-        return encoded_text
+        return encoded_text, codes
 
 
     @staticmethod
