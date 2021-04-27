@@ -1,4 +1,6 @@
 import os
+import zlib
+import json
 from tree import Tree
 
 
@@ -30,12 +32,23 @@ if __name__ == '__main__':
     # print("Input: {} \n".format(text)) # uncomment to see input
 
     tree = Tree(text)
-    encoded_text = tree.compute()
+    encoded_text, codes = tree.compute()
 
     if not os.path.isfile('./{}'.format(OUTPUT_FILE)):
         os.mknod("{}".format(OUTPUT_FILE))
 
-    output_file = open("./{}".format(OUTPUT_FILE), 'w')
-    output_file.write(encoded_text)
+    output_file = open("./{}".format(OUTPUT_FILE), 'wb')
+    
+    print("Codes: {}\n".format(codes))
+    codes = json.dumps(codes)
+    codes = bytearray(codes.encode('utf-8'))
+    compressed_codes = zlib.compress(codes)
+    
+    encoded_text = bytearray(encoded_text.encode('utf-8'))
+    compressed = zlib.compress(encoded_text)
+    print("Compressed string: {}\n".format(compressed))
+    print("Compressed codes: {}".format(compressed_codes))
+    output_file.write(compressed)
+    output_file.write(compressed_codes)
+
     output_file.close()
-    print("\n")
